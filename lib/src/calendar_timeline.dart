@@ -408,6 +408,7 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
   Widget _buildMonthList() {
     return SizedBox(
       height: 30,
+      width: 200,
       child: ScrollablePositionedList.builder(
         initialScrollIndex: _monthSelectedIndex ?? 0,
         initialAlignment: _scrollAlignment,
