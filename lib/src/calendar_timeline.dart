@@ -39,6 +39,7 @@ class CalendarTimeline extends StatefulWidget {
     this.shrink = false,
     this.locale,
     this.showYears = false,
+    this.showYearsInDropDown = false,
     this.eventDates,
   })  : assert(
           initialDate.difference(firstDate).inDays >= 0,
@@ -88,6 +89,7 @@ class CalendarTimeline extends StatefulWidget {
   /// If true, it will show a separate row for the years.
   /// It defaults to false
   final bool showYears;
+  final bool showYearsInDropDown;
 
   @override
   State<CalendarTimeline> createState() => _CalendarTimelineState();
@@ -341,7 +343,13 @@ class _CalendarTimelineState extends State<CalendarTimeline> {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        if (widget.showYears) _buildYearList(),
+        if (widget.showYears && !widget.showYearsInDropDown) _buildYearList(),
+        if (widget.showYears && widget.showYearsInDropDown) Row(
+          children: [
+            Expanded(child:  _buildMonthList()),
+            DropdownButton(items: [DropdownMenuItem(child: Text("dfdf"))], onChanged: (val){})
+          ],
+        ),
         _buildMonthList(),
         _buildDayList(),
       ],
